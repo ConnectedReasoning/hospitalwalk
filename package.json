@@ -5,7 +5,8 @@
   "main": "index",
   "description": "Hospital Walk",
   "scripts": {
-    "start": "node index"
+    "start": "node index", 
+    "dev": "nodemon index"
   },
   "engines": {
     "node": "~8.11.4",
