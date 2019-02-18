@@ -1,8 +1,4 @@
-var drawLine= function(xone, yone, xtwo, ytwo){
 
-    d3.select("#root").select("#floor").append("line").style("stroke", "blue").style("stroke-dasharray", ("4, 10")).attr("stroke-width", "5").attr("id", "manny").attr("x1", xone).attr("y1", yone+25).attr("x2", xtwo).attr("y2", ytwo+25);
-    console.log('line is from {' + xone + ', ' + yone + '} to {' + xtwo + ', ' + ytwo + '}');
-}
 var path = [
   { x: 450, y:  0 },
   { x: 475, y: -275+0 },
@@ -33,7 +29,15 @@ var x2 = 0;
 var y2 = 0;
 
 var step = {}; path[i];
-
+for(var i = 0; i < path.length; i++){
+  if(i > 0) { 
+    x1 = path[i-1].x;
+    y1 = path[i-1].y+874;
+  }
+  x2 = path[i].x;
+  y2 = path[i].y +874;
+  d3.select("#root").select("#floor").append("line").style("stroke", "blue").style("stroke-dasharray", ("4, 10")).attr("stroke-width", "8").attr("id", "segment"+i).attr("x1", x1).attr("y1", y1+25).attr("x2", x2).attr("y2", y2+25);  
+};
 for(var i = 0; i < path.length; i++){
   if(i > 0) { 
     x1 = path[i-1].x;
@@ -43,8 +47,6 @@ for(var i = 0; i < path.length; i++){
   y2 = path[i].y +874;
 
   tl.add( TweenLite.to("#person", 2, {x:x2, y:y2, ease:Sine.easeOut }));
-  
-  drawLine(x1, y1, x2, y2);
   
 };
 
