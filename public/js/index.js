@@ -67,8 +67,7 @@ var pathTween = function(path){
   return function(t){
     var point = path.node().getPointAtLength(r(t)); // Get the next point along the path
     d3.select(this) // Select the circle
-      .attr("cx", point.x) // Set the cx
-      .attr("cy", point.y) // Set the cy
+     .attr('transform','translate(' + point.x + ', ' + point.y + ') scale(.4 .4)')
   }
 }
 var lineGraph = svgContainer.append("path")
@@ -87,9 +86,9 @@ var totalLength = lineGraph.node().getTotalLength();
     .ease(d3.easeLinear)
     .attr("stroke-dashoffset", 0);
 
-	svgContainer.append("circle")
-    .attr("cx", 15) //Starting x
-    .attr("cy", 15) //Starting y
+	person
+    .attr("x", 15) //Starting x
+    .attr("y", 15) //Starting y
     .attr("r", 15).transition()
     .duration(20000)
     .ease(d3.easeLinear)

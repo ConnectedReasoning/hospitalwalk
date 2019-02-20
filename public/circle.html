@@ -29,10 +29,7 @@
 			.style("stroke", "black")
 			.style("fill", "none");
 
-		svg.append("circle")
-            .attr("cx", 15) //Starting x
-            .attr("cy", 15) //Starting y
-            .attr("r", 15)
+		svg.append("g").html(person)
 			.transition()
 			.delay(250)
 			.duration(1000)
@@ -48,8 +45,8 @@
 			return function(t){
 				var point = path.node().getPointAtLength(r(t)); // Get the next point along the path
 				d3.select(this) // Select the circle
-					.attr("cx", point.x) // Set the cx
-					.attr("cy", point.y) // Set the cy
+					.attr('transform','translate(' + point.x + ', ' + point.y + ')') // Set the cx
+	 cy
 			}
 		}
 	</script>
