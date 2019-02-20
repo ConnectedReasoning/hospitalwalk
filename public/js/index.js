@@ -63,11 +63,13 @@ var pathTween = function(path){
   console.log('in pathTween path is ', path);
   console.log('in pathTween this is ', this);
   var length = path.node().getTotalLength(); // Get the length of the path
-  var r = d3.interpolate(0, length); //Set up interpolation from 0 to the path length
+   var r = d3.interpolate(0, length); //Set up interpolation from 0 to the path length 
   return function(t){
     var point = path.node().getPointAtLength(r(t)); // Get the next point along the path
+    var newX = point.x - 20;
+    var newY = point.y - 20;
     d3.select(this) // Select the circle
-     .attr('transform','translate(' + point.x + ', ' + point.y + ') scale(.4 .4)')
+     .attr('transform','translate(' + newX + ', ' + newY + ') scale(.4 .4)')
   }
 }
 var lineGraph = svgContainer.append("path")
@@ -86,33 +88,10 @@ var totalLength = lineGraph.node().getTotalLength();
     .ease(d3.easeLinear)
     .attr("stroke-dashoffset", 0);
 
-	person
-    .attr("x", 15) //Starting x
-    .attr("y", 15) //Starting y
-    .attr("r", 15).transition()
+	person.transition()
     .duration(20000)
     .ease(d3.easeLinear)
     .tween("pathTween", function(){return pathTween(lineGraph)})
     // .tween("pathTween", pathTween); //Custom tween to set the cx and cy attributes*/
 
- console.log('total-length is ', totalLength);
-
-var tl = new TimelineLite();
-var x1 = 0;
-var y1 = 875;
-var x2 = 0;
-var y2 = 0;
-
-var step = {}; person_path[i];
-
-for(var i = 0; i < person_path.length; i++){
-  if(i > 0) { 
-    x1 = person_path[i-1].x;
-    y1 = person_path[i-1].y+874;
-  }
-  x2 = person_path[i].x;
-  y2 = person_path[i].y +874;
-
-  //tl.add( TweenLite.to("#person", 2, {x:x2, y:y2, ease:Sine.easeOut }));
-  
-};
+ 
