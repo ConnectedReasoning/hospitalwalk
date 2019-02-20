@@ -55,31 +55,46 @@ var lineFunction = d3.line()
 
 //The SVG Container
 var svgContainer =d3.select("#root").select("#floor");
-
+var person = d3.select("#root").select('#floor').select('#person');
+console.log('person is ', person);
 //The line SVG Path we draw
+
+var pathTween = function(path){
+  console.log('in pathTween path is ', path);
+  console.log('in pathTween this is ', this);
+  var length = path.node().getTotalLength(); // Get the length of the path
+  var r = d3.interpolate(0, length); //Set up interpolation from 0 to the path length
+  return function(t){
+    var point = path.node().getPointAtLength(r(t)); // Get the next point along the path
+    d3.select(this) // Select the circle
+      .attr("cx", point.x) // Set the cx
+      .attr("cy", point.y) // Set the cy
+  }
+}
 var lineGraph = svgContainer.append("path")
                             .attr("d", lineFunction(line_path))
                             .attr("stroke", "blue")
                             .attr("stroke-width", 2)
                             .attr("fill", "none");
 
- var totalLength = lineGraph.node().getTotalLength();
+var totalLength = lineGraph.node().getTotalLength();
 
   lineGraph
     .attr("stroke-dasharray", totalLength + " " + totalLength)
     .attr("stroke-dashoffset", totalLength)
     .transition()
-      .duration(person_path.length * 1100)
-      .ease(d3.easeLinear)
-      .attr("stroke-dashoffset", 0);
+    .duration(person_path.length * 1050)
+    .ease(d3.easeLinear)
+    .attr("stroke-dashoffset", 0);
 
-  lineGraph.on("click", function(){
-    lineGraph      
-      .transition()
-      .duration(2000)
-      .ease(d3.easeLinear)
-      .attr("stroke-dashoffset", totalLength);
-  })
+	svgContainer.append("circle")
+    .attr("cx", 15) //Starting x
+    .attr("cy", 15) //Starting y
+    .attr("r", 15).transition()
+    .duration(20000)
+    .ease(d3.easeLinear)
+    .tween("pathTween", function(){return pathTween(lineGraph)})
+    // .tween("pathTween", pathTween); //Custom tween to set the cx and cy attributes*/
 
  console.log('total-length is ', totalLength);
 
@@ -99,6 +114,6 @@ for(var i = 0; i < person_path.length; i++){
   x2 = person_path[i].x;
   y2 = person_path[i].y +874;
 
-  tl.add( TweenLite.to("#person", 2, {x:x2, y:y2, ease:Sine.easeOut }));
+  //tl.add( TweenLite.to("#person", 2, {x:x2, y:y2, ease:Sine.easeOut }));
   
 };
