@@ -38,7 +38,7 @@ var personTween = function(path){
     var point = path.node().getPointAtLength(r(t)); // Get the next point along the path
     var newX = point.x - 20;
     var newY = point.y - 20;
-    d3.select(this) // Select the item
+    d3.select(this) // Select the traveling icon
      .attr('transform','translate(' + newX + ', ' + newY + ') scale(.4 .4)')
   }
 }
