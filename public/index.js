@@ -44,7 +44,7 @@ var personTween = function(path){
 }
 var linePath = svgContainer.append("path")
   .attr("d", lineTween(lineCoordinates))
-  .attr("stroke", "magenta")
+  .attr("stroke", "royalblue")
   .attr("stroke-width", 5)
   .attr("fill", "none");
 
