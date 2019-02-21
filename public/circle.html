@@ -38,15 +38,11 @@
 			// .tween("pathTween", pathTween); //Custom tween to set the cx and cy attributes
 
 		function pathTween(path){
-      console.log('in pathTween path is ', path);
-      console.log('in pathTween this is ', this);
 			var length = path.node().getTotalLength(); // Get the length of the path
 			var r = d3.interpolate(0, length); //Set up interpolation from 0 to the path length
 			return function(t){
 				var point = path.node().getPointAtLength(r(t)); // Get the next point along the path
-				d3.select(this) // Select the circle
-					.attr('transform','translate(' + point.x + ', ' + point.y + ')') // Set the cx
-	 cy
+				d3.select(this).attr('transform','translate(' + point.x + ', ' + point.y + ')') 
 			}
 		}
 	</script>
