@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "request": "^2.60.0",
-    "svg-inline-loader": "^0.8.0"
+    "svg-inline-loader": "^0.8.2"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
